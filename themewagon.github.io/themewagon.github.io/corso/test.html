@@ -1,334 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
-
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
-
-body {
-    font-family: 'Poppins', sans-serif;
-    background: #f7f2e9; /* Light creamy background */
-    display: flex;
-    justify-content: center;
-    align-items: center; 
-    min-height: 100vh; 
-}
-
-.container {
-    width: 450px;
-    padding: 30px; 
-    margin-top: 80px;
-    background-color: #fff;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); 
-    border-radius: 20px;
-    text-align: center; 
-}
-
-h1 {
-    color: #e27d60; /* Main orange color */
-}
-
-.question {
-    font-weight: bold;
-    margin-bottom: 15px;
-}
-
-.options {
-    margin-bottom: 20px;
-}
-
-.option {
-    display: block;
-    margin-bottom: 15px; 
-}
-
-.option label {
-    display: block;
-    padding: 10px 15px; 
-    background-color: #fcf8f3;  
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 15px;  
-    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1); 
-}
-
-.option label:hover {
-    background-color: #f5e9d7; 
-} 
-
-.option input[type="radio"]:checked + label {
-    background-color: #e27d60;
-    color: #fff;
-}
-
-.option label:focus {
-    outline: 2px solid #e27d60;  
-    outline-offset: 2px;
-}
-
-.button {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #e27d60; 
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    border-radius: 5px; 
-    transition: background-color 0.3s;
-    margin-right: 10px;
-}
-
-.button:hover {
-    background-color: #cc6949; 
-}
-
-.result {
-    margin-top: 20px;
-    font-weight: bold;
-    color: #e27d60;  
-}
-
-.hide {
-    display: none;
-}
-
-
-    </style>
+    <title>Quiz Form</title>
+    <!-- Add Bootstrap CSS CDN link -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Add jQuery CDN link -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
-
 <body>
-    <div class="container">
-        <h1>Quiz App</h1>
-        <div id="quiz"></div>
-        <div id="result" class="result"></div>
-        <button id="submit" class="button">Submit</button>
-        <button id="retry" class="button hide">Retry</button>
-        <button id="showAnswer" class="button hide">Show Answer</button>
-    </div>
-    <script>
-const quizData = [
-    {
-        question: "Do you enjoy...",
-        options: [
-            "Tackling complex puzzles and finding creative solutions",
-            "Analyzing data to uncover patterns and trends",
-            "Working with hardware and building physical systems",
-            "Designing visually appealing and user-friendly interfaces" 
-        ],
-        answer: "" // No single 'correct' answer for interest gauging 
-    },
-    {
-        question: "When it comes to technology, I'm most interested in...",
-        options: [
-            "Understanding how large-scale systems interact",
-            "The intricate details of how specific components function",
-            "Optimizing code for efficiency and performance",
-            "Finding security vulnerabilities and protecting systems"
-        ],
-        answer: "" // No single 'correct' answer for interest gauging
-    },
-    {
-        question: "I prefer working on projects...",
-        options: [
-            "In a team, brainstorming ideas and sharing knowledge",
-            "Independently, with focus and minimal interruptions",
-            "In a small group with a clear division of tasks",
-            "Where I can alternate between team and solo work" 
-        ],
-        answer: "" // No single 'correct' answer for interest gauging
-    },
-    { 
-        question: "My experience with programming is best described as...",
-        options: [
-            "I've built projects in multiple languages",
-            "I have a solid grasp of basic concepts",
-            "I'm a beginner, but eager to learn",
-            "I prefer working with visual design tools"
-        ],
-        answer: "" // No single 'correct' answer for skill assessment
-    },
-    {
-        question: "When faced with a technical issue, my approach is to...",
-        options: [
-            "Research potential solutions online and experiment",
-            "Break down the problem into smaller, more manageable steps",
-            "Seek help from a mentor or someone more experienced",
-            "Get frustrated easily and tend to give up"
-        ],
-        answer: "" // No single 'correct' answer for skill assessment
-    },
-    {
-        question: "I would describe my ability to understand interconnected systems as...",
-        options: [
-            "Strong – I can easily visualize how components work together",
-            "Moderate – It takes some effort, but I can grasp it",
-            "Developing – I need more practice in this area",
-            "Not a strength of mine"
-        ],
-        answer: "" // No single 'correct' answer for skill assessment
-    },
-    {
-        question: "When considering a tech solution, I believe...",
-        options: [
-            "Security and privacy should be a top priority from the start",
-            "Security is important, but needs to be balanced with other factors",
-            "It's okay to compromise security for speed and convenience",
-            "Security isn't a major concern in most cases"
-        ],
-        answer: "" // No single 'correct' answer for values 
-    },
-    {
-        question: "My work style prioritizes...",
-        options: [
-            "Getting things done quickly, even if it means minor imperfections",
-            "Meticulous accuracy, ensuring minimal errors",
-            "Finding a balance between speed and precision",
-            "Constant iteration and improvement over time" 
-        ],
-        answer: "" // No single 'correct' answer for values 
-    },
-    {
-        question: "I find myself more drawn to...",
-        options: [
-            "Creating brand new technologies and solutions",
-            "Optimizing and refining existing systems",
-            "Troubleshooting and resolving issues in current technologies",
-            "Both innovation and maintenance are equally appealing"
-        ],
-        answer: "" // No single 'correct' answer for values 
-    }
-];
 
-        const quizContainer = document.getElementById('quiz');
-        const resultContainer = document.getElementById('result');
-        const submitButton = document.getElementById('submit');
-        const retryButton = document.getElementById('retry');
-        const showAnswerButton = document.getElementById('showAnswer');
+<div class="container mt-5">
+    <form id="assessment-form" data-netlify="true" action="/submit-assessment" method="POST">
 
-        let currentQuestion = 0;
-        let score = 0;
-        let incorrectAnswers = [];
+        <!-- Quiz sections -->
+        <div id="interest-quiz" class="mb-4"></div>
+        <div id="skill-quiz" class="mb-4"></div>
+        <div id="values-quiz" class="mb-4"></div>
 
-        function shuffleArray(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
-            }
+        <!-- Hidden input fields to store quiz responses -->
+        <input type="hidden" id="interest-responses" name="interest-responses">
+        <input type="hidden" id="skill-responses" name="skill-responses">
+        <input type="hidden" id="values-responses" name="values-responses">
+
+        <!-- Button to submit assessment -->
+        <button type="button" id="submit-assessment" class="btn btn-primary">Submit Assessment</button>
+
+    </form>
+</div>
+
+<script>
+    $(document).ready(function () {
+        // Function to generate quiz questions dynamically
+        function generateQuiz(containerId, questions) {
+            var quizContainer = $("#" + containerId);
+            $.each(questions, function (index, question) {
+                var questionHtml = "<h4>" + question.title + "</h4>";
+                questionHtml += "<ul class='list-unstyled'>";
+                $.each(question.options, function (optionIndex, option) {
+                    questionHtml += "<li><input type='radio' name='" + containerId + "-" + index + "' value='" + optionIndex + "' class='form-check-input'>" + option + "</li>";
+                });
+                questionHtml += "</ul>";
+                quizContainer.append(questionHtml);
+            });
         }
 
-        function displayQuestion() {
-            const questionData = quizData[currentQuestion];
+        // Example quiz questions
+        var interestQuestions = [
+            { title: "What activities do you enjoy in your free time?", options: ["Reading", "Playing sports", "Cooking", "Watching movies"] },
+            { title: "What subjects do you find most engaging?", options: ["Science", "History", "Art", "Mathematics"] },
+            { title: "Which career paths intrigue you the most?", options: ["Technology", "Healthcare", "Education", "Business"] }
+        ];
 
-            const questionElement = document.createElement('div');
-            questionElement.className = 'question';
-            questionElement.innerHTML = questionData.question;
+        var skillQuestions = [
+            { title: "Rate your proficiency in communication skills (1-5)", options: ["1", "2", "3", "4", "5"] },
+            { title: "Rate your problem-solving abilities (1-5)", options: ["1", "2", "3", "4", "5"] },
+            { title: "Rate your technical skills (1-5)", options: ["1", "2", "3", "4", "5"] }
+        ];
 
-            const optionsElement = document.createElement('div');
-            optionsElement.className = 'options';
+        var valuesQuestions = [
+            { title: "I prioritize work-life balance.", options: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"] },
+            { title: "I value creativity and innovation.", options: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"] },
+            { title: "I seek opportunities for personal growth and development.", options: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"] }
+        ];
 
-            const shuffledOptions = [...questionData.options];
-            shuffleArray(shuffledOptions);
+        // Generate quiz questions
+        generateQuiz("interest-quiz", interestQuestions);
+        generateQuiz("skill-quiz", skillQuestions);
+        generateQuiz("values-quiz", valuesQuestions);
 
-            for (let i = 0; i < shuffledOptions.length; i++) {
-                const option = document.createElement('label');
-                option.className = 'option';
+        // Functionality to submit assessment
+        $("#submit-assessment").click(function () {
+            // Gather selected options from the quiz questions
+            var interestResponses = $("#interest-quiz input[type='radio']:checked").map(function () {
+                return $(this).val();
+            }).get().join(',');
 
-                const radio = document.createElement('input');
-                radio.type = 'radio';
-                radio.name = 'quiz';
-                radio.value = shuffledOptions[i];
+            var skillResponses = $("#skill-quiz input[type='radio']:checked").map(function () {
+                return $(this).val();
+            }).get().join(',');
 
-                const optionText = document.createTextNode(shuffledOptions[i]);
+            var valuesResponses = $("#values-quiz input[type='radio']:checked").map(function () {
+                return $(this).val();
+            }).get().join(',');
 
-                option.appendChild(radio);
-                option.appendChild(optionText);
-                optionsElement.appendChild(option);
-            }
+            // Populate hidden input fields with quiz responses
+            $("#interest-responses").val(interestResponses);
+            $("#skill-responses").val(skillResponses);
+            $("#values-responses").val(valuesResponses);
 
-            quizContainer.innerHTML = '';
-            quizContainer.appendChild(questionElement);
-            quizContainer.appendChild(optionsElement);
-        }
+            // Submit the form
+            $("#assessment-form").submit();
+        });
+    });
+</script>
 
-        function checkAnswer() {
-            const selectedOption = document.querySelector('input[name="quiz"]:checked');
-            if (selectedOption) {
-                const answer = selectedOption.value;
-                if (answer === quizData[currentQuestion].answer) {
-                    score++;
-                } else {
-                    incorrectAnswers.push({
-                        question: quizData[currentQuestion].question,
-                        incorrectAnswer: answer,
-                        correctAnswer: quizData[currentQuestion].answer,
-                    });
-                }
-                currentQuestion++;
-                selectedOption.checked = false;
-                if (currentQuestion < quizData.length) {
-                    displayQuestion();
-                } else {
-                    displayResult();
-                }
-            }
-        }
-
-        function displayResult() {
-            quizContainer.style.display = 'none';
-            submitButton.style.display = 'none';
-            retryButton.style.display = 'inline-block';
-            showAnswerButton.style.display = 'inline-block';
-            resultContainer.innerHTML = `You scored ${score} out of ${quizData.length}!`;
-        }
-
-        function retryQuiz() {
-            currentQuestion = 0;
-            score = 0;
-            incorrectAnswers = [];
-            quizContainer.style.display = 'block';
-            submitButton.style.display = 'inline-block';
-            retryButton.style.display = 'none';
-            showAnswerButton.style.display = 'none';
-            resultContainer.innerHTML = '';
-            displayQuestion();
-        }
-
-        function showAnswer() {
-            quizContainer.style.display = 'none';
-            submitButton.style.display = 'none';
-            retryButton.style.display = 'inline-block';
-            showAnswerButton.style.display = 'none';
-
-            let incorrectAnswersHtml = '';
-            for (let i = 0; i < incorrectAnswers.length; i++) {
-                incorrectAnswersHtml += `
-      <p>
-        <strong>Question:</strong> ${incorrectAnswers[i].question}<br>
-        <strong>Your Answer:</strong> ${incorrectAnswers[i].incorrectAnswer}<br>
-        <strong>Correct Answer:</strong> ${incorrectAnswers[i].correctAnswer}
-      </p>
-    `;
-            }
-
-            resultContainer.innerHTML = `
-    <p>You scored ${score} out of ${quizData.length}!</p>
-    <p>Incorrect Answers:</p>
-    ${incorrectAnswersHtml}
-  `;
-        }
-
-        submitButton.addEventListener('click', checkAnswer);
-        retryButton.addEventListener('click', retryQuiz);
-        showAnswerButton.addEventListener('click', showAnswer);
-
-        displayQuestion();
-    </script>
 </body>
-
 </html>

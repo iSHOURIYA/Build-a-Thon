@@ -961,53 +961,71 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
-    <script>
-        $(document).ready(function () {
-            // Function to generate quiz questions dynamically
-            function generateQuiz(containerId, questions) {
-                var quizContainer = $("#" + containerId);
-                $.each(questions, function (index, question) {
-                    var questionHtml = "<h4>" + question.title + "</h4>";
-                    questionHtml += "<ul>";
-                    $.each(question.options, function (optionIndex, option) {
-                        questionHtml += "<li><input type='radio' name='" + containerId + "-" + index + "' value='" + optionIndex + "'>" + option + "</li>";
+        <script>
+            $(document).ready(function () {
+                // Function to generate quiz questions dynamically
+                function generateQuiz(containerId, questions) {
+                    var quizContainer = $("#" + containerId);
+                    $.each(questions, function (index, question) {
+                        var questionHtml = "<h4>" + question.title + "</h4>";
+                        questionHtml += "<ul>";
+                        $.each(question.options, function (optionIndex, option) {
+                            questionHtml += "<li><input type='radio' name='" + containerId + "-" + index + "' value='" + optionIndex + "'>" + option + "</li>";
+                        });
+                        questionHtml += "</ul>";
+                        quizContainer.append(questionHtml);
                     });
-                    questionHtml += "</ul>";
-                    quizContainer.append(questionHtml);
+                }
+        
+                // Example quiz questions
+                var interestQuestions = [
+                    { title: "What activities do you enjoy in your free time?", options: ["Reading", "Playing sports", "Cooking", "Watching movies"] },
+                    { title: "What subjects do you find most engaging?", options: ["Science", "History", "Art", "Mathematics"] },
+                    { title: "Which career paths intrigue you the most?", options: ["Technology", "Healthcare", "Education", "Business"] }
+                ];
+        
+                var skillQuestions = [
+                    { title: "Rate your proficiency in communication skills (1-5)", options: ["1", "2", "3", "4", "5"] },
+                    { title: "Rate your problem-solving abilities (1-5)", options: ["1", "2", "3", "4", "5"] },
+                    { title: "Rate your technical skills (1-5)", options: ["1", "2", "3", "4", "5"] }
+                ];
+        
+                var valuesQuestions = [
+                    { title: "I prioritize work-life balance.", options: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"] },
+                    { title: "I value creativity and innovation.", options: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"] },
+                    { title: "I seek opportunities for personal growth and development.", options: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"] }
+                ];
+        
+                // Generate quiz questions
+                generateQuiz("interest-quiz", interestQuestions);
+                generateQuiz("skill-quiz", skillQuestions);
+                generateQuiz("values-quiz", valuesQuestions);
+        
+                // Functionality to submit assessment
+                $("#submit-assessment").click(function () {
+                    // Gather selected options from the quiz questions
+                    var interestResponses = $("#interest-quiz input[type='radio']:checked").map(function () {
+                        return $(this).val();
+                    }).get().join(',');
+        
+                    var skillResponses = $("#skill-quiz input[type='radio']:checked").map(function () {
+                        return $(this).val();
+                    }).get().join(',');
+        
+                    var valuesResponses = $("#values-quiz input[type='radio']:checked").map(function () {
+                        return $(this).val();
+                    }).get().join(',');
+        
+                    // Populate hidden input fields with quiz responses
+                    $("#interest-responses").val(interestResponses);
+                    $("#skill-responses").val(skillResponses);
+                    $("#values-responses").val(valuesResponses);
+        
+                    // Submit the form
+                    $("#assessment-form").submit();
                 });
-            }
-
-            // Example quiz questions
-            var interestQuestions = [
-                { title: "What activities do you enjoy in your free time?", options: ["Reading", "Playing sports", "Cooking", "Watching movies"] },
-                { title: "What subjects do you find most engaging?", options: ["Science", "History", "Art", "Mathematics"] },
-                { title: "Which career paths intrigue you the most?", options: ["Technology", "Healthcare", "Education", "Business"] }
-            ];
-
-            var skillQuestions = [
-                { title: "Rate your proficiency in communication skills (1-5)", options: ["1", "2", "3", "4", "5"] },
-                { title: "Rate your problem-solving abilities (1-5)", options: ["1", "2", "3", "4", "5"] },
-                { title: "Rate your technical skills (1-5)", options: ["1", "2", "3", "4", "5"] }
-            ];
-
-            var valuesQuestions = [
-                { title: "I prioritize work-life balance.", options: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"] },
-                { title: "I value creativity and innovation.", options: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"] },
-                { title: "I seek opportunities for personal growth and development.", options: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"] }
-            ];
-
-            // Generate quiz questions
-            generateQuiz("interest-quiz", interestQuestions);
-            generateQuiz("skill-quiz", skillQuestions);
-            generateQuiz("values-quiz", valuesQuestions);
-
-            // Functionality to submit assessment
-            $("#submit-assessment").click(function () {
-                // Add functionality to submit assessment here
-                alert("Assessment submitted!");
             });
-        });
-    </script>
+        </script>
 </body>
 
 </html>
