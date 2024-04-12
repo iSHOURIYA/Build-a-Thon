@@ -95,9 +95,9 @@ https://templatemo.com/tm-557-grad-school
                   sessions, collaborate on projects, and access multimedia resources seamlessly. Say goodbye to
                   traditional classrooms and embrace the freedom and flexibility of online learning with Layman Learning
                   School.</p>
-                <div class="scroll-to-section">
-                  <!-- Change the href attribute to "#" initially -->
-                  <a href="#">Explore !</a>
+                  <div class="scroll-to-section">
+                    <!-- Change the href attribute to "#" initially -->
+                    <a href="https://themewagon.github.io/corso/index1.html">Explore !</a>
                 </div>
               </div>
             </div>
@@ -641,31 +641,31 @@ https://templatemo.com/tm-557-grad-school
       }
     });
   </script>
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const exploreLink = document.querySelector('.scroll-to-section a');
+   <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const exploreLink = document.querySelector('.scroll-to-section a');
 
-      if (exploreLink) {
-        // Add event listener to explore link
-        exploreLink.addEventListener('click', function (event) {
-          // Prevent default action
-          event.preventDefault();
+        if (exploreLink) {
+            // Add event listener to explore link
+            exploreLink.addEventListener('click', function(event) {
+                // Prevent default action
+                event.preventDefault();
 
-          // Check if user is logged in
-          const user = window.netlifyIdentity.currentUser();
-          if (user) {
-            // Redirect to the specified URL
-            window.location.href = exploreLink.getAttribute('themewagon.github.io\themewagon.github.io\corso\index1.html');
-          } else {
-            // Open Netlify Identity login modal
-            if (window.netlifyIdentity) {
-              window.netlifyIdentity.open();
-            }
-          }
-        });
-      }
+                // Check if user is logged in
+                const user = window.netlifyIdentity.currentUser();
+                if (user) {
+                    // Redirect to the specified URL
+                    window.location.href = exploreLink.getAttribute('href');
+                } else {
+                    // Open Netlify Identity login modal
+                    if (window.netlifyIdentity) {
+                        window.netlifyIdentity.open();
+                    }
+                }
+            });
+        }
     });
-  </script>
+</script>
 
 
 
