@@ -1,0 +1,1 @@
+chrome-extension://moomnncijchljipbmkiblfbaaldinhde/js_content/enable_copy.js
