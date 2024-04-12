@@ -20,6 +20,9 @@
     <link rel="stylesheet" href="assets/css/owl.css">
     <link rel="stylesheet" href="assets/css/lightbox.css">
     <link rel="icon" href="/assets/images/favicon_io/favicon-32x32.png" type="image/x-icon">
+    <!-- Include Netlify Identity Script -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    
 <!--
     
 TemplateMo 557 Grad School
@@ -35,27 +38,27 @@ https://templatemo.com/tm-557-grad-school
   <!--header-->
   <header class="main-header clearfix" role="header">
     <div class="logo">
-      <a href="#"><em>Layman</em> Learning</a>
+        <a href="#"><em>Layman</em> Learning</a>
     </div>
     <a href="#menu" class="menu-link"><i class="fa fa-bars"></i></a>
     <nav id="menu" class="main-nav" role="navigation">
-      <ul class="main-menu">
-        <li><a href="#section1">Home</a></li>
-        <li class="has-submenu"><a href="#section2">About Us</a>
-          <ul class="sub-menu">
-            <li><a href="#section2">Who we are?</a></li>
-            <!-- <li><a href="#section3">What we do?</a></li>
-            <li><a href="#section3">How it works?</a></li> -->
-            <!-- <li><a href="https://templatemo.com/about" rel="sponsored" class="external">External URL</a></li> -->
-          </ul>
-        </li>
-        <li><a href="#section4">Courses</a></li>
-        <!-- <li><a href="#section5">Video</a></li> -->
-        <li><a href="#section6">Contact</a></li>
-        <li><a href="/login/New account/nACC.html" class="external">Get Started !</a></li>
-      </ul>
+        <ul class="main-menu">
+            <li><a href="#section1">Home</a></li>
+            <li class="has-submenu"><a href="#section2">About Us</a>
+                <ul class="sub-menu">
+                    <li><a href="#section2">Who we are?</a></li>
+                    <!-- <li><a href="#section3">What we do?</a></li>
+                    <li><a href="#section3">How it works?</a></li> -->
+                    <!-- <li><a href="https://templatemo.com/about" rel="sponsored" class="external">External URL</a></li> -->
+                </ul>
+            </li>
+            <li><a href="#section4">Courses</a></li>
+            <!-- <li><a href="#section5">Video</a></li> -->
+            <li><a href="#section6">Contact</a></li>
+            <li><a href="#" class="external">Get Started !</a></li> <!-- This is the "Get Started" link -->
+        </ul>
     </nav>
-  </header>
+</header>
 
   <!-- ***** Main Banner Area Start ***** -->
   <section class="section main-banner" id="top" data-section="section1">
@@ -566,6 +569,41 @@ https://templatemo.com/tm-557-grad-school
       loop: true
     });
   </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const getStartedLink = document.querySelector('.main-nav .main-menu .external');
+
+        if (getStartedLink) {
+            getStartedLink.addEventListener('click', function(event) {
+                event.preventDefault();
+
+                // Open Netlify Identity login modal
+                if (window.netlifyIdentity) {
+                    window.netlifyIdentity.open();
+                }
+            });
+
+            // Check if user is logged in on page load
+            const user = window.netlifyIdentity.currentUser();
+            if (user) {
+                updateGetStartedLink(user);
+            }
+
+            // Listen for login event
+            window.netlifyIdentity.on('login', function(user) {
+                updateGetStartedLink(user);
+            });
+        }
+
+        function updateGetStartedLink(user) {
+            // Update link text to display username
+            getStartedLink.textContent = user.user_metadata.full_name; // or any other property you want to display
+            // Update link href to logout page or any other appropriate action
+            getStartedLink.href = "/logout"; // Example: Change to logout page
+        }
+    });
+</script>
+  
 
     
 </body>
