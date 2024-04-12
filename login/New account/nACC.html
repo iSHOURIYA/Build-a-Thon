@@ -32,27 +32,21 @@
 
     <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-auth.js"></script>
-    
+
     <script>
         // Your web app's Firebase configuration
         var firebaseConfig = {
-            apiKey: "YOUR_API_KEY",
-            authDomain: "layman-learning.firebaseapp.com",
-            projectId: "layman-learning",
-            storageBucket: "layman-learning.appspot.com",
-            messagingSenderId: "587083072957",
-            appId: "1:587083072957:web:0c33a6e63d02812c9f8759"
+            apiKey: "YOUR_FIREBASE_API_KEY",
+            authDomain: "layman-learning-9bd20.firebaseapp.com",
+            projectId: "layman-learning-9bd20",
+            storageBucket: "layman-learning-9bd20.appspot.com",
+            messagingSenderId: "126214313330",
+            appId: "1:126214313330:web:0c33a6e63d02812c9f8759",
+            measurementId: "G-MEASUREMENT_ID"
         };
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
         
-        function animateButton(button) {
-            button.classList.add('button-clicked');
-            setTimeout(() => {
-                button.classList.remove('button-clicked');
-            }, 300); // Adjust the duration to match the transition duration
-        }
-      
         // Google Sign-In function
         function signInWithGoogle() {
             var provider = new firebase.auth.GoogleAuthProvider();
@@ -75,6 +69,14 @@
                     var credential = error.credential;
                     // ...
                 });
+        }
+
+        // Animation function
+        function animateButton(button) {
+            button.classList.add('button-clicked');
+            setTimeout(() => {
+                button.classList.remove('button-clicked');
+            }, 300); // Adjust the duration to match the transition duration
         }
     </script>
 
