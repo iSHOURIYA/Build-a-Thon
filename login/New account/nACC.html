@@ -33,27 +33,11 @@
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
     <script>
-        // Initialize Netlify Identity
-        if (window.netlifyIdentity) {
-            window.netlifyIdentity.on("init", user => {
-                if (user) {
-                    // User is logged in, update UI
-                    updateUI(user);
-                }
-            });
-        }
-
         // Netlify Identity Sign-In function
         function signInWithNetlify() {
             if (window.netlifyIdentity) {
                 window.netlifyIdentity.open();
             }
-        }
-
-        // Update UI after successful login
-        function updateUI(user) {
-            // Redirect to index.html
-            window.location.href = "https://learning.layman.world/index.html";
         }
 
         // Animation function
@@ -62,6 +46,21 @@
             setTimeout(() => {
                 button.classList.remove('button-clicked');
             }, 300); // Adjust the duration to match the transition duration
+        }
+
+        // Initialize Netlify Identity
+        if (window.netlifyIdentity) {
+            window.netlifyIdentity.on("init", user => {
+                if (user) {
+                    // User is logged in, update UI
+                    updateUI(user);
+                }
+            });
+
+            window.netlifyIdentity.on("login", () => {
+                // Redirect to index.html after successful login
+                window.location.href = "https://learning.layman.world/index.html";
+            });
         }
     </script>
 
