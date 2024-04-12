@@ -607,40 +607,41 @@ https://templatemo.com/tm-557-grad-school
       loop: true
     });
   </script>
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const getStartedLink = document.querySelector('.main-nav .main-menu .external');
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const getStartedLink = document.querySelector('.main-nav .main-menu .external');
 
-      if (getStartedLink) {
-        getStartedLink.addEventListener('click', function (event) {
-          event.preventDefault();
+    if (getStartedLink) {
+      getStartedLink.addEventListener('click', function(event) {
+        event.preventDefault();
 
-          // Open Netlify Identity login modal
-          if (window.netlifyIdentity) {
-            window.netlifyIdentity.open();
-          }
-        });
-
-        // Check if user is logged in on page load
-        const user = window.netlifyIdentity.currentUser();
-        if (user) {
-          updateGetStartedLink(user);
+        // Open Netlify Identity login modal
+        if (window.netlifyIdentity) {
+          window.netlifyIdentity.open();
         }
+      });
 
-        // Listen for login event
-        window.netlifyIdentity.on('login', function (user) {
-          updateGetStartedLink(user);
-        });
+      // Check if user is logged in on page load
+      const user = window.netlifyIdentity.currentUser();
+      if (user) {
+        updateGetStartedLink(user);
       }
 
-      function updateGetStartedLink(user) {
-        // Update link text to display username
-        getStartedLink.textContent = user.user_metadata.full_name; // or any other property you want to display
-        // Update link href to logout page or any other appropriate action
-        getStartedLink.href = "/logout"; // Example: Change to logout page
-      }
-    });
-  </script>
+      // Listen for login event
+      window.netlifyIdentity.on('login', function(user) {
+        updateGetStartedLink(user);
+      });
+    }
+
+    function updateGetStartedLink(user) {
+      // Update link text to display username
+      getStartedLink.textContent = user.user_metadata.full_name || 'Get Started'; // Show 'Get Started' if full name is not available
+      // Update link href to logout page or any other appropriate action
+      getStartedLink.href = "/logout"; // Example: Change to logout page
+    }
+  });
+</script>
+
 
 
 
