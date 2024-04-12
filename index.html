@@ -63,14 +63,15 @@ https://templatemo.com/tm-557-grad-school
       </video>
 
       <div class="video-overlay header-text">
-          <div class="caption">
-              <h6>School of Layman Learnings</h6>
-              <h2><em>Your</em> Classroom</h2>
-              <div class="main-button">
-                  <div class="scroll-to-section"><a href="#section2">Discover more</a></div>
-              </div>
-          </div>
+        <div class="caption">
+            <h6>School of Layman Learnings</h6>
+            <h2><em>Your</em> <span id="classroomText"></span></h2>
+            <div class="main-button">
+                <div class="scroll-to-section"><a href="#section2">Discover more</a></div>
+            </div>
+        </div>
       </div>
+      
   </section>
   <!-- ***** Main Banner Area End ***** -->
 
@@ -129,7 +130,7 @@ https://templatemo.com/tm-557-grad-school
       <div class="row">
         <div class="col-md-12">
           <div class="section-heading">
-            <h2>Why choose Grad School?</h2>
+            <h2>Why choose Layman Learning School?</h2>
           </div>
         </div>
         <div class="col-md-12">
@@ -558,5 +559,16 @@ https://templatemo.com/tm-557-grad-school
           checkSection();
         });
     </script>
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+  <script>
+    var typed = new Typed('#classroomText', {
+      strings: ['Career Development','P2P Tutor','Virtual Classroom'],
+      typeSpeed: 50,
+      backSpeed: 50,
+      loop: true
+    });
+  </script>
+
+    
 </body>
 </html>
