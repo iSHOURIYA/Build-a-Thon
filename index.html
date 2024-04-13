@@ -643,46 +643,29 @@ https://templatemo.com/tm-557-grad-school
   </script>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      const exploreLinks = document.querySelectorAll('.scroll-to-section a');
-  
-      exploreLinks.forEach(link => {
-        link.addEventListener('click', function (event) {
+      const exploreLink = document.querySelector('.scroll-to-section a');
+
+      if (exploreLink) {
+        // Add event listener to explore link
+        exploreLink.addEventListener('click', function (event) {
+          // Prevent default action
           event.preventDefault();
-  
+
           // Check if user is logged in
           const user = window.netlifyIdentity.currentUser();
           if (user) {
-            // If logged in, forward the link to Google.com
-            window.location.href = 'https://learning.layman.world/themewagon.github.io/themewagon.github.io/corso/index1.html';
+            // Redirect to the specified URL
+            window.location.href = exploreLink.getAttribute('');
           } else {
-            // If not logged in, open Netlify Identity login modal
+            // Open Netlify Identity login modal
             if (window.netlifyIdentity) {
               window.netlifyIdentity.open();
             }
           }
         });
-      });
-  
-      // Check if user is logged in on page load
-      const user = window.netlifyIdentity.currentUser();
-      if (user) {
-        // Change all links to Google.com if user is logged in
-        exploreLinks.forEach(link => {
-          link.setAttribute('href', 'https://www.google.com');
-        });
       }
-  
-      // Listen for login event
-      window.netlifyIdentity.on('login', function (user) {
-        // Change all links to Google.com after user logs in
-        exploreLinks.forEach(link => {
-          link.setAttribute('href', 'https://www.google.com');
-        });
-      });
     });
   </script>
-  
-
 
 
 
