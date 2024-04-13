@@ -97,7 +97,7 @@ https://templatemo.com/tm-557-grad-school
                   School.</p>
                 <div class="scroll-to-section">
                   <!-- Change the href attribute to "#" initially -->
-                  <a href="#">Explore !</a>
+                  <a href="#" class="link" data-loggedin-url="https://example.com/loggedin1">Link 1</a>
                 </div>
               </div>
             </div>
@@ -115,7 +115,9 @@ https://templatemo.com/tm-557-grad-school
                   help you navigate your career path with confidence. Whether you're exploring career options or
                   advancing in your current field, Layman Learning School equips you with the tools and support you need
                   to achieve your goals.</p>
-                <div class="scroll-to-section"><a href="#section3">Explore !</a></div>
+                <div class="scroll-to-section">
+                  <a href="#" class="link" data-loggedin-url="https://example.com/loggedin2">Link 2</a>
+                </div>
               </div>
             </div>
           </div>
@@ -132,7 +134,7 @@ https://templatemo.com/tm-557-grad-school
                   learning needs. Whether you're struggling with a challenging subject or seeking to deepen your
                   understanding, our tutors are here to help you succeed. Join Layman Learning School and embark on a
                   journey of academic excellence today.</p>
-                <div class="scroll-to-section"><a href="#section4">Explore !</a></div>
+                <div class="scroll-to-section"><a href="#" class="link" data-loggedin-url="https://example.com/loggedin3">Link 3</a></div>
               </div>
             </div>
           </div>
@@ -679,6 +681,55 @@ https://templatemo.com/tm-557-grad-school
         // Change all links to Google.com after user logs in
         exploreLinks.forEach(link => {
           link.setAttribute('href', 'https://learning.layman.world/themewagon.github.io/themewagon.github.io/corso/index1.html');
+        });
+      });
+    });
+  </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const exploreLinks = document.querySelectorAll('.link');
+
+      exploreLinks.forEach(link => {
+        link.addEventListener('click', function (event) {
+          event.preventDefault();
+
+          // Check if user is logged in
+          const user = window.netlifyIdentity.currentUser();
+          if (user) {
+            // If logged in, forward the link to the appropriate URL based on the link's data attribute
+            const destination = link.getAttribute('data-loggedin-url');
+            if (destination) {
+              window.location.href = destination;
+            }
+          } else {
+            // If not logged in, open Netlify Identity login modal
+            if (window.netlifyIdentity) {
+              window.netlifyIdentity.open();
+            }
+          }
+        });
+      });
+
+      // Check if user is logged in on page load
+      const user = window.netlifyIdentity.currentUser();
+      if (user) {
+        // Change all links to the appropriate URLs if user is logged in
+        exploreLinks.forEach(link => {
+          const destination = link.getAttribute('data-loggedin-url');
+          if (destination) {
+            link.setAttribute('href', destination);
+          }
+        });
+      }
+
+      // Listen for login event
+      window.netlifyIdentity.on('login', function (user) {
+        // Change all links to the appropriate URLs after user logs in
+        exploreLinks.forEach(link => {
+          const destination = link.getAttribute('data-loggedin-url');
+          if (destination) {
+            link.setAttribute('href', destination);
+          }
         });
       });
     });
