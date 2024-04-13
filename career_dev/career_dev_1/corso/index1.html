@@ -231,8 +231,7 @@
     
                 <!-- Registration Form -->
                 <div class="form-container">
-                    <form id="registrationForm" name="registrationForm"  method="POST" action="/career_dev/career_dev_1/corso/test.html">
-                        <!-- <input type="hidden" name="redirect" value="https://learning.layman.world/career_dev\career_ dev _1\corso\test.html"> -->
+                    <form id="registrationForm" name="registrationForm" method="POST" action="/career_dev/career_dev_1/corso/test.html" onsubmit="return validateForm(event)">
                         <div class="form-group">
                             <input type="text" class="form-control-input" id="rname" name="rname" required>
                             <label class="label-control" for="rname">Full Name</label>
@@ -987,20 +986,20 @@
     </script>
     <script>
         function validateForm(event) {
-            var name = document.forms["registrationForm"]["rname"].value;
-            var email = document.forms["registrationForm"]["remail"].value;
-            var phone = document.forms["registrationForm"]["rphone"].value;
-            var termsChecked = document.forms["registrationForm"]["rterms"].checked;
-    
-            if (name == "") {
+            var name = document.getElementById("rname").value;
+            var email = document.getElementById("remail").value;
+            var phone = document.getElementById("rphone").value;
+            var termsChecked = document.getElementById("rterms").checked;
+
+            if (name.trim() === "") {
                 alert("Please enter your name");
                 return false;
             }
-            if (email == "") {
+            if (email.trim() === "") {
                 alert("Please enter your email");
                 return false;
             }
-            if (phone == "") {
+            if (phone.trim() === "") {
                 alert("Please enter your phone number");
                 return false;
             }
@@ -1008,7 +1007,7 @@
                 alert("Please agree to the terms");
                 return false;
             }
-            // If all validations pass, submit the form
+            // If all validations pass, the form will submit
             return true;
         }
     </script>
