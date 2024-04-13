@@ -249,7 +249,8 @@ https://templatemo.com/tm-557-grad-school
             <div class="top-content">
               <h6>Register your free account and <em>get immediate</em> access to our online services.</h6>
             </div>
-            <form name="New User" id="contact" action="/Sub.html" method="POST" netlify>
+            <form action='/Sub' id='contact' method='POST' name='New User'><input type='hidden' name='form-name'
+                value='New User' />
               <div class="row">
                 <div class="col-md-12">
                   <fieldset>
@@ -482,7 +483,8 @@ https://templatemo.com/tm-557-grad-school
 
 
 
-          <form name="contact" id="contact" action="/Sub.html" method="post" netlify>
+          <form action='/Sub' id='contact' method='post' name='contact'><input type='hidden' name='form-name'
+              value='contact' />
             <div class="row">
               <div class="col-md-6">
                 <fieldset>
@@ -643,29 +645,46 @@ https://templatemo.com/tm-557-grad-school
   </script>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      const exploreLink = document.querySelector('.scroll-to-section a');
+      const exploreLinks = document.querySelectorAll('.scroll-to-section a');
 
-      if (exploreLink) {
-        // Add event listener to explore link
-        exploreLink.addEventListener('click', function (event) {
-          // Prevent default action
+      exploreLinks.forEach(link => {
+        link.addEventListener('click', function (event) {
           event.preventDefault();
 
           // Check if user is logged in
           const user = window.netlifyIdentity.currentUser();
           if (user) {
-            // Redirect to the specified URL
-            window.location.href = exploreLink.getAttribute('');
+            // If logged in, forward the link to Google.com
+            window.location.href = 'https://learning.layman.world/themewagon.github.io/themewagon.github.io/corso/index1.html';
           } else {
-            // Open Netlify Identity login modal
+            // If not logged in, open Netlify Identity login modal
             if (window.netlifyIdentity) {
               window.netlifyIdentity.open();
             }
           }
         });
+      });
+
+      // Check if user is logged in on page load
+      const user = window.netlifyIdentity.currentUser();
+      if (user) {
+        // Change all links to Google.com if user is logged in
+        exploreLinks.forEach(link => {
+          link.setAttribute('href', 'https://www.google.com');
+        });
       }
+
+      // Listen for login event
+      window.netlifyIdentity.on('login', function (user) {
+        // Change all links to Google.com after user logs in
+        exploreLinks.forEach(link => {
+          link.setAttribute('href', 'https://www.google.com');
+        });
+      });
     });
   </script>
+
+
 
 
 
