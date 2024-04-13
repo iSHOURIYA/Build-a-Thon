@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <section class="form-section">
+    <div class="form-container">
+        <form id="userForm" name="p2p" method="POST" netlify>
+            <fieldset>
+                <legend>User Type</legend>
+                <label for="userType">Select your role:</label>
+                <select id="userType">
+                    <option value="">--Select--</option>
+                    <option value="teacher">Teacher</option>
+                    <option value="student">Student</option>
+                </select>
+            </fieldset>
+
+            <fieldset id="teacherOptions" style="display: none;">
+                <legend>Teacher Details</legend>
+
+                <label for="subject">Subject:</label>
+                <select id="subject">
+                  <option value="">--Select--</option>
+                  <option value="math">Mathematics</option>
+                  <option value="science">Science</option>
+                  <option value="english">English</option>
+                </select>
+
+                <label for="timeSlot">Time Slot:</label>
+                <select id="timeSlot">
+                  </select>
+            </fieldset>
+
+            <fieldset id="studentOptions" style="display: none;">
+                <legend>Student Details</legend>
+            
+                <label for="graduation">Have you done graduation?</label>
+                <select id="graduation">
+                  <option value="">--Select--</option>
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                </select>
+            
+                <label for="subjectStudent">Subject you want to study:</label>
+                <select id="subjectStudent">
+                  <option value="">--Select--</option>
+                  <option value="math">Mathematics</option>
+                  <option value="science">Science</option>
+                  <option value="english">English</option>
+                </select>
+            
+                <label for="timeSlotStudent">Preferred Time Slot:</label>
+                <select id="timeSlotStudent"> 
+                </select>
+            </fieldset>
+                
+
+            
+
+            <button type="submit">Submit</button>
+        </form>
+        
+    </div>
+</section>
+    <script src="script.js"></script>
+</body>
+</html>
