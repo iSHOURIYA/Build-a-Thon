@@ -12,38 +12,52 @@
         <form id="userForm" name="p2p" method="POST" netlify>
             <fieldset>
                 <legend>User Type</legend>
-                <label><input type="radio" name="userType" value="teacher"> Teacher</label>
-                <label><input type="radio" name="userType" value="student"> Student</label>
+                <label for="userType">Select your role:</label>
+                <select id="userType">
+                    <option value="">--Select--</option>
+                    <option value="teacher">Teacher</option>
+                    <option value="student">Student</option>
+                </select>
             </fieldset>
-        
+
             <fieldset id="teacherOptions" style="display: none;">
                 <legend>Teacher Details</legend>
-                <label><input type="radio" name="subject" value="math"> Mathematics</label>
-                <label><input type="radio" name="subject" value="science"> Science</label>
-                <label><input type="radio" name="subject" value="english"> English</label>
-                <label for="timeSlot">Time Slot:</label>
-                <select id="timeSlot" name="timeSlot">
-                    <!-- Options for time slot here -->
+
+                <label for="subject">Subject:</label>
+                <select id="subject">
+                  <option value="">--Select--</option>
+                  <option value="math">Mathematics</option>
+                  <option value="science">Science</option>
+                  <option value="english">English</option>
                 </select>
+
+                <label for="timeSlot">Time Slot:</label>
+                <select id="timeSlot">
+                  </select>
             </fieldset>
-        
+
             <fieldset id="studentOptions" style="display: none;">
                 <legend>Student Details</legend>
-                <label><input type="radio" name="graduation" value="yes"> Yes</label>
-                <label><input type="radio" name="graduation" value="no"> No</label>
-                <label><input type="radio" name="subjectStudent" value="math"> Mathematics</label>
-                <label><input type="radio" name="subjectStudent" value="science"> Science</label>
-                <label><input type="radio" name="subjectStudent" value="english"> English</label>
+            
+                <label for="graduation">Have you done graduation?</label>
+                <select id="graduation">
+                  <option value="">--Select--</option>
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                </select>
+            
+                <label for="subjectStudent">Subject you want to study:</label>
+                <select id="subjectStudent">
+                  <option value="">--Select--</option>
+                  <option value="math">Mathematics</option>
+                  <option value="science">Science</option>
+                  <option value="english">English</option>
+                </select>
+            
                 <label for="timeSlotStudent">Preferred Time Slot:</label>
-                <select id="timeSlotStudent" name="timeSlotStudent">
-                    <!-- Options for time slot here -->
+                <select id="timeSlotStudent"> 
                 </select>
             </fieldset>
-        
-            <!-- Add submit button here -->
-            <button type="submit">Submit</button>
-        </form>
-        
                 
 
             
