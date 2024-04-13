@@ -254,8 +254,9 @@
                             <div class="help-block with-errors"></div>
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="form-control-submit-button">Submit</button>
+                            <button type="submit" class="form-control-submit-button" onclick="return validateForm()">Submit</button>
                         </div>
+                        
                         <div class="form-message">
                             <div id="rmsgSubmit" class="h3 text-center hidden"></div>
                         </div>
@@ -985,12 +986,12 @@
         });
     </script>
     <script>
-        function validateForm() {
+        function validateForm(event) {
             var name = document.forms["registrationForm"]["rname"].value;
             var email = document.forms["registrationForm"]["remail"].value;
             var phone = document.forms["registrationForm"]["rphone"].value;
             var termsChecked = document.forms["registrationForm"]["rterms"].checked;
-        
+    
             if (name == "") {
                 alert("Please enter your name");
                 return false;
@@ -1007,35 +1008,11 @@
                 alert("Please agree to the terms");
                 return false;
             }
+            // If all validations pass, submit the form
+            return true;
         }
-        </script>
-        <script>
-            function validateForm(event) {
-                var name = document.forms["registrationForm"]["rname"].value;
-                var email = document.forms["registrationForm"]["remail"].value;
-                var phone = document.forms["registrationForm"]["rphone"].value;
-                var termsChecked = document.forms["registrationForm"]["rterms"].checked;
-            
-                if (name == "") {
-                    alert("Please enter your name");
-                    return false;
-                }
-                if (email == "") {
-                    alert("Please enter your email");
-                    return false;
-                }
-                if (phone == "") {
-                    alert("Please enter your phone number");
-                    return false;
-                }
-                if (!termsChecked) {
-                    alert("Please agree to the terms");
-                    return false;
-                }
-                // Prevent default form submission
-                event.preventDefault();
-            }
-        </script>
+    </script>
+    
 </body>
 
 </html>
