@@ -101,183 +101,189 @@ h1 {
 
 <body>
     <div class="container">
-        <h1>Quiz</h1>
-        <div id="quiz"></div>
-        <div id="result" class="result"></div>
-        <button id="submit" class="button">Submit</button>
-        <button id="retry" class="button hide">Retry</button>
-        <button id="showAnswer" class="button hide">Show Answer</button>
+        <div class="container">
+            <h1>Quiz</h1>
+            <div id="quiz"></div>
+            <div id="result" class="result"></div>
+            <div id="cohortSuggestion" class="result hide"></div>
+            <button id="submit" class="button">Submit</button>
+            <button id="retry" class="button hide">Retry</button>
+            <button id="showAnswer" class="button hide">Show Answer</button>
+            <button id="redirectButton" class="button hide">Go to Cohort Details</button>
+        </div>
+        
+        
     </div>
     <script>
-const quizData = [
-    {
-        question: "Do you enjoy...",
-        options: [
-            "Tackling complex puzzles and finding creative solutions",
-            "Analyzing data to uncover patterns and trends",
-            "Working with hardware and building physical systems",
-            "Designing visually appealing and user-friendly interfaces" 
-        ],
-        answer: "" // No single 'correct' answer for interest gauging 
-    },
-    {
-        question: "When it comes to technology, I'm most interested in...",
-        options: [
-            "Understanding how large-scale systems interact",
-            "The intricate details of how specific components function",
-            "Optimizing code for efficiency and performance",
-            "Finding security vulnerabilities and protecting systems"
-        ],
-        answer: "" // No single 'correct' answer for interest gauging
-    },
-    {
-        question: "I prefer working on projects...",
-        options: [
-            "In a team, brainstorming ideas and sharing knowledge",
-            "Independently, with focus and minimal interruptions",
-            "In a small group with a clear division of tasks",
-            "Where I can alternate between team and solo work" 
-        ],
-        answer: "" // No single 'correct' answer for interest gauging
-    },
-    { 
-        question: "My experience with programming is best described as...",
-        options: [
-            "I've built projects in multiple languages",
-            "I have a solid grasp of basic concepts",
-            "I'm a beginner, but eager to learn",
-            "I prefer working with visual design tools"
-        ],
-        answer: "" // No single 'correct' answer for skill assessment
-    },
-    {
-        question: "When faced with a technical issue, my approach is to...",
-        options: [
-            "Research potential solutions online and experiment",
-            "Break down the problem into smaller, more manageable steps",
-            "Seek help from a mentor or someone more experienced",
-            "Get frustrated easily and tend to give up"
-        ],
-        answer: "" // No single 'correct' answer for skill assessment
-    },
-    {
-        question: "I would describe my ability to understand interconnected systems as...",
-        options: [
-            "Strong – I can easily visualize how components work together",
-            "Moderate – It takes some effort, but I can grasp it",
-            "Developing – I need more practice in this area",
-            "Not a strength of mine"
-        ],
-        answer: "" // No single 'correct' answer for skill assessment
-    },
-    {
-        question: "When considering a tech solution, I believe...",
-        options: [
-            "Security and privacy should be a top priority from the start",
-            "Security is important, but needs to be balanced with other factors",
-            "It's okay to compromise security for speed and convenience",
-            "Security isn't a major concern in most cases"
-        ],
-        answer: "" // No single 'correct' answer for values 
-    },
-    {
-        question: "My work style prioritizes...",
-        options: [
-            "Getting things done quickly, even if it means minor imperfections",
-            "Meticulous accuracy, ensuring minimal errors",
-            "Finding a balance between speed and precision",
-            "Constant iteration and improvement over time" 
-        ],
-        answer: "" // No single 'correct' answer for values 
-    },
-    {
-        question: "I find myself more drawn to...",
-        options: [
-            "Creating brand new technologies and solutions",
-            "Optimizing and refining existing systems",
-            "Troubleshooting and resolving issues in current technologies",
-            "Both innovation and maintenance are equally appealing"
-        ],
-        answer: "" // No single 'correct' answer for values 
-    }
-];
+                const quizData = [
+            {
+                question: "Do you enjoy...",
+                options: [
+                    "Tackling complex puzzles and finding creative solutions",
+                    "Analyzing data to uncover patterns and trends",
+                    "Working with hardware and building physical systems",
+                    "Designing visually appealing and user-friendly interfaces" 
+                ],
+                answer: "" // No single 'correct' answer for interest gauging 
+            },
+            {
+                question: "When it comes to technology, I'm most interested in...",
+                options: [
+                    "Understanding how large-scale systems interact",
+                    "The intricate details of how specific components function",
+                    "Optimizing code for efficiency and performance",
+                    "Finding security vulnerabilities and protecting systems"
+                ],
+                answer: "" // No single 'correct' answer for interest gauging
+            },
+            {
+                question: "I prefer working on projects...",
+                options: [
+                    "In a team, brainstorming ideas and sharing knowledge",
+                    "Independently, with focus and minimal interruptions",
+                    "In a small group with a clear division of tasks",
+                    "Where I can alternate between team and solo work" 
+                ],
+                answer: "" // No single 'correct' answer for interest gauging
+            },
+            { 
+                question: "My experience with programming is best described as...",
+                options: [
+                    "I've built projects in multiple languages",
+                    "I have a solid grasp of basic concepts",
+                    "I'm a beginner, but eager to learn",
+                    "I prefer working with visual design tools"
+                ],
+                answer: "" // No single 'correct' answer for skill assessment
+            },
+            {
+                question: "When faced with a technical issue, my approach is to...",
+                options: [
+                    "Research potential solutions online and experiment",
+                    "Break down the problem into smaller, more manageable steps",
+                    "Seek help from a mentor or someone more experienced",
+                    "Get frustrated easily and tend to give up"
+                ],
+                answer: "" // No single 'correct' answer for skill assessment
+            },
+            {
+                question: "I would describe my ability to understand interconnected systems as...",
+                options: [
+                    "Strong – I can easily visualize how components work together",
+                    "Moderate – It takes some effort, but I can grasp it",
+                    "Developing – I need more practice in this area",
+                    "Not a strength of mine"
+                ],
+                answer: "" // No single 'correct' answer for skill assessment
+            },
+            {
+                question: "When considering a tech solution, I believe...",
+                options: [
+                    "Security and privacy should be a top priority from the start",
+                    "Security is important, but needs to be balanced with other factors",
+                    "It's okay to compromise security for speed and convenience",
+                    "Security isn't a major concern in most cases"
+                ],
+                answer: "" // No single 'correct' answer for values 
+            },
+            {
+                question: "My work style prioritizes...",
+                options: [
+                    "Getting things done quickly, even if it means minor imperfections",
+                    "Meticulous accuracy, ensuring minimal errors",
+                    "Finding a balance between speed and precision",
+                    "Constant iteration and improvement over time" 
+                ],
+                answer: "" // No single 'correct' answer for values 
+            },
+            {
+                question: "I find myself more drawn to...",
+                options: [
+                    "Creating brand new technologies and solutions",
+                    "Optimizing and refining existing systems",
+                    "Troubleshooting and resolving issues in current technologies",
+                    "Both innovation and maintenance are equally appealing"
+                ],
+                answer: "" // No single 'correct' answer for values 
+            }
+        ];
 
+        const quizContainer = document.getElementById('quiz');
+        const cohortSuggestion = document.getElementById('cohortSuggestion');
+        const submitButton = document.getElementById('submit');
 
-const quizContainer = document.getElementById('quiz');
-const cohortSuggestion = document.getElementById('cohortSuggestion');
-const submitButton = document.getElementById('submit');
+        let currentQuestion = 0;
+        let userAnswers = [];
 
-let currentQuestion = 0;
-let userAnswers = [];
-
-function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-    }
-}
-
-function displayQuestion() {
-    const questionData = quizData[currentQuestion];
-
-    quizContainer.innerHTML = ''; // Clear previous content
-
-    const questionElement = document.createElement('div');
-    questionElement.className = 'question';
-    questionElement.textContent = questionData.question;
-    quizContainer.appendChild(questionElement);
-
-    const optionsElement = document.createElement('div');
-    optionsElement.className = 'options';
-    quizContainer.appendChild(optionsElement);
-
-    const shuffledOptions = [...questionData.options];
-    shuffleArray(shuffledOptions);
-
-    for (const optionText of shuffledOptions) {
-        const option = document.createElement('label');
-        option.className = 'option';
-
-        const radio = document.createElement('input');
-        radio.type = 'radio';
-        radio.name = 'quiz';
-        radio.value = optionText;
-        option.appendChild(radio);
-
-        const optionLabel = document.createTextNode(optionText);
-        option.appendChild(optionLabel);
-
-        optionsElement.appendChild(option);
-    }
-}
-
-function checkAnswer() {
-    const selectedOption = document.querySelector('input[name="quiz"]:checked');
-    if (selectedOption) {
-        const answer = selectedOption.value;
-        userAnswers.push(answer);
-        currentQuestion++;
-        selectedOption.checked = false; 
-        if (currentQuestion < quizData.length) {
-            displayQuestion();
-        } else {
-            finishQuiz();
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
         }
-    }
-}
 
-function finishQuiz() {
-    quizContainer.style.display = 'none';
-    submitButton.style.display = 'none';
-    cohortSuggestion.classList.remove('hide');
-    analyzeAnswers();
-}
+        function displayQuestion() {
+            const questionData = quizData[currentQuestion];
 
-function analyzeAnswers() {
+            quizContainer.innerHTML = ''; // Clear previous content
+
+            const questionElement = document.createElement('div');
+            questionElement.className = 'question';
+            questionElement.textContent = questionData.question;
+            quizContainer.appendChild(questionElement);
+
+            const optionsElement = document.createElement('div');
+            optionsElement.className = 'options';
+            quizContainer.appendChild(optionsElement);
+
+            const shuffledOptions = [...questionData.options];
+            shuffleArray(shuffledOptions);
+
+            for (const optionText of shuffledOptions) {
+                const option = document.createElement('label');
+                option.className = 'option';
+
+                const radio = document.createElement('input');
+                radio.type = 'radio';
+                radio.name = 'quiz';
+                radio.value = optionText;
+                option.appendChild(radio);
+
+                const optionLabel = document.createTextNode(optionText);
+                option.appendChild(optionLabel);
+
+                optionsElement.appendChild(option);
+            }
+        }
+  
+        function checkAnswer() {
+            const selectedOption = document.querySelector('input[name="quiz"]:checked');
+            if (selectedOption) {
+                const answer = selectedOption.value;
+                userAnswers.push(answer);
+                currentQuestion++;
+                selectedOption.checked = false; 
+                if (currentQuestion < quizData.length) {
+                    displayQuestion();
+                } else {
+                    finishQuiz();
+                }
+            }
+        }
+
+        function finishQuiz() {
+            quizContainer.style.display = 'none';
+            submitButton.style.display = 'none';
+            cohortSuggestion.classList.remove('hide');
+            analyzeAnswers();
+        }
+
+        function analyzeAnswers() {
     let cyberSecScore = 0;
     let cloudScore = 0;
-    let hardwareScore = 0; // Example: Added a new cohort
+    let hardwareScore = 0;
 
+    // Calculate scores based on user's answers
     for (let answer of userAnswers) {
         if (answer === "Finding security vulnerabilities...") {
             cyberSecScore += 2;
@@ -285,9 +291,10 @@ function analyzeAnswers() {
             cloudScore += 2;
         } else if (answer === "Working with hardware...") { 
             hardwareScore += 2; 
-        } // ... Add more scoring logic
+        } // Add more scoring logic for other categories if needed
     }
 
+    // Determine the suggested cohort based on scores
     let suggestedCohort = "";
     if (cyberSecScore >= 6) {
         suggestedCohort = "Cybersecurity";
@@ -299,12 +306,60 @@ function analyzeAnswers() {
         suggestedCohort = "General Tech Exploration";
     }
 
+    // Display the suggested cohort to the user
     cohortSuggestion.innerHTML = `Based on your answers, you might be interested in the ${suggestedCohort} cohort.`;
+
+    // Show the cohort suggestion and redirect button
+    cohortSuggestion.classList.remove('hide');
+    redirectButton.classList.remove('hide');
+
+    // Define the mapping of cohorts to their respective links
+    const cohortLinks = {
+        "Cybersecurity": "https://www.youtube.com/live/lpa8uy4DyMo?si=35JBaXUoN6J9INP-",
+        "Cloud Computing": "https://youtu.be/2LaAJq1lB1Q?si=eL8Kaf_xFDDXGjSx",
+        "Hardware & Embedded Systems": "https://youtu.be/TP1_F3IVjBc?si=baMKTqdO7IEb9Bzh",
+        "General Tech Exploration": "https://youtu.be/lsYFtwwlHIw?si=AXQY4r53AHLIq0sF"
+    };
+
+    // Set up the redirect link based on the suggested cohort
+    redirectButton.addEventListener('click', function() {
+        const link = cohortLinks[suggestedCohort];
+        if (link) {
+            window.location.href = link;
+        } else {
+            console.error(`Link not found for cohort: ${suggestedCohort}`);
+        }
+    });
+
+    // Optionally, you can also save the suggested cohort to the backend along with the user's answers
+    saveSuggestedCohortToBackend(suggestedCohort);
 }
 
-submitButton.addEventListener('click', checkAnswer);
-displayQuestion();
- 
+
+function saveSuggestedCohortToBackend(cohort) {
+    // Send an HTTP POST request to the backend to save the suggested cohort
+    fetch('https://your-backend-server.com/save-cohort', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ cohort }),
+    })
+    .then(response => {
+        if (response.ok) {
+            console.log('Suggested cohort saved successfully');
+        } else {
+            console.error('Failed to save suggested cohort');
+        }
+    })
+    .catch(error => {
+        console.error('Error saving suggested cohort:', error);
+    });
+}
+
+
+        submitButton.addEventListener('click', checkAnswer);
+        displayQuestion();
     </script>
 </body>
 
