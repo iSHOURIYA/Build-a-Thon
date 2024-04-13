@@ -154,7 +154,7 @@
                         <h1>Career Development Resources</h1>
                         <p class="p-large">Explore your career path, identify your skills and interests, and set SMART
                             goals to achieve your aspirations.</p>
-                        <a class="btn-solid-lg page-scroll" href="test.html" target="_blank">Take Assessment</a>
+                        <a class="btn-solid-lg page-scroll" href="#register">Take Assessment</a>
                         <a class="btn-outline-lg page-scroll" href="#exploration">Explore Careers</a>
                         <a class="btn-outline-lg page-scroll" href="#goal-setting">Set Goals</a>
                     </div> <!-- end of text-container -->
@@ -200,7 +200,6 @@
     </header> <!-- end of header -->
 
 
-    <!-- Registration -->
     <div id="register" class="form-1">
         <div class="container">
             <div class="row">
@@ -229,10 +228,11 @@
                     </div> <!-- end of text-container -->
                 </div> <!-- end of col -->
                 <div class="col-lg-6">
-
+    
                     <!-- Registration Form -->
                     <div class="form-container">
-                        <form id="registrationForm" data-toggle="validator" data-focus="false" name="register" netlify>
+                        <form id="registrationForm" name="registrationForm" data-netlify="true" onsubmit="return validateForm()">
+                            <input type="hidden" name="redirect" value="http://127.0.0.1:5500/themewagon.github.io/corso/test.html">
                             <div class="form-group">
                                 <input type="text" class="form-control-input" id="rname" name="rname" required>
                                 <label class="label-control" for="rname">Full Name</label>
@@ -254,61 +254,23 @@
                                 <div class="help-block with-errors"></div>
                             </div>
                             <div class="form-group">
-                                <button type="submit" class="form-control-submit-button">REGISTER</button>
+                                <button type="submit" class="form-control-submit-button">Submit</button>
                             </div>
                             <div class="form-message">
                                 <div id="rmsgSubmit" class="h3 text-center hidden"></div>
                             </div>
                         </form>
                     </div> <!-- end of form-container -->
-                    <!-- end of registration form -->
-
                 </div> <!-- end of col -->
             </div> <!-- end of row -->
         </div> <!-- end of container -->
+    </div> <!-- end of register -->    <!-- end of registration form -->
+
+    </div> <!-- end of col -->
+    </div> <!-- end of row -->
+    </div> <!-- end of container -->
     </div> <!-- end of form-1 -->
     <!-- end of registration -->
-    <div id="assessment" class="assessment-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h2>Take Assessment</h2>
-                    <p class="p-heading">Discover your interests, skills, and values through this interactive quiz.</p>
-                </div> <!-- end of col -->
-            </div> <!-- end of row -->
-            <div class="row">
-                <div class="col-lg-6">
-                    <h3>Interest Quiz</h3>
-                    <p>Answer the following questions to identify your interests:</p>
-                    <div class="quiz" id="interest-quiz">
-                        <!-- Interest quiz questions will be generated dynamically here -->
-                    </div>
-                </div> <!-- end of col -->
-                <div class="col-lg-6">
-                    <h3>Skill Quiz</h3>
-                    <p>Assess your skills by completing the tasks below:</p>
-                    <div class="quiz" id="skill-quiz">
-                        <!-- Skill quiz questions will be generated dynamically here -->
-                    </div>
-                </div> <!-- end of col -->
-            </div> <!-- end of row -->
-            <div class="row">
-                <div class="col-lg-12">
-                    <h3>Values Quiz</h3>
-                    <p>Reflect on the following statements to determine your values:</p>
-                    <div class="quiz" id="values-quiz">
-                        <!-- Values quiz questions will be generated dynamically here -->
-                    </div>
-                </div> <!-- end of col -->
-            </div> <!-- end of row -->
-            <div class="row">
-                <div class="col-lg-12">
-                    <button id="submit-assessment" class="btn-solid-lg">Submit Assessment</button>
-                </div> <!-- end of col -->
-            </div> <!-- end of row -->
-        </div> <!-- end of container -->
-    </div> <!-- end of assessment-section -->
-
 
     <!-- Partners -->
     <div class="slider-1">
@@ -961,70 +923,95 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
-        <script>
-            $(document).ready(function () {
-                // Function to generate quiz questions dynamically
-                function generateQuiz(containerId, questions) {
-                    var quizContainer = $("#" + containerId);
-                    $.each(questions, function (index, question) {
-                        var questionHtml = "<h4>" + question.title + "</h4>";
-                        questionHtml += "<ul>";
-                        $.each(question.options, function (optionIndex, option) {
-                            questionHtml += "<li><input type='radio' name='" + containerId + "-" + index + "' value='" + optionIndex + "'>" + option + "</li>";
-                        });
-                        questionHtml += "</ul>";
-                        quizContainer.append(questionHtml);
+    <script>
+        $(document).ready(function () {
+            // Function to generate quiz questions dynamically
+            function generateQuiz(containerId, questions) {
+                var quizContainer = $("#" + containerId);
+                $.each(questions, function (index, question) {
+                    var questionHtml = "<h4>" + question.title + "</h4>";
+                    questionHtml += "<ul>";
+                    $.each(question.options, function (optionIndex, option) {
+                        questionHtml += "<li><input type='radio' name='" + containerId + "-" + index + "' value='" + optionIndex + "'>" + option + "</li>";
                     });
-                }
-        
-                // Example quiz questions
-                var interestQuestions = [
-                    { title: "What activities do you enjoy in your free time?", options: ["Reading", "Playing sports", "Cooking", "Watching movies"] },
-                    { title: "What subjects do you find most engaging?", options: ["Science", "History", "Art", "Mathematics"] },
-                    { title: "Which career paths intrigue you the most?", options: ["Technology", "Healthcare", "Education", "Business"] }
-                ];
-        
-                var skillQuestions = [
-                    { title: "Rate your proficiency in communication skills (1-5)", options: ["1", "2", "3", "4", "5"] },
-                    { title: "Rate your problem-solving abilities (1-5)", options: ["1", "2", "3", "4", "5"] },
-                    { title: "Rate your technical skills (1-5)", options: ["1", "2", "3", "4", "5"] }
-                ];
-        
-                var valuesQuestions = [
-                    { title: "I prioritize work-life balance.", options: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"] },
-                    { title: "I value creativity and innovation.", options: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"] },
-                    { title: "I seek opportunities for personal growth and development.", options: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"] }
-                ];
-        
-                // Generate quiz questions
-                generateQuiz("interest-quiz", interestQuestions);
-                generateQuiz("skill-quiz", skillQuestions);
-                generateQuiz("values-quiz", valuesQuestions);
-        
-                // Functionality to submit assessment
-                $("#submit-assessment").click(function () {
-                    // Gather selected options from the quiz questions
-                    var interestResponses = $("#interest-quiz input[type='radio']:checked").map(function () {
-                        return $(this).val();
-                    }).get().join(',');
-        
-                    var skillResponses = $("#skill-quiz input[type='radio']:checked").map(function () {
-                        return $(this).val();
-                    }).get().join(',');
-        
-                    var valuesResponses = $("#values-quiz input[type='radio']:checked").map(function () {
-                        return $(this).val();
-                    }).get().join(',');
-        
-                    // Populate hidden input fields with quiz responses
-                    $("#interest-responses").val(interestResponses);
-                    $("#skill-responses").val(skillResponses);
-                    $("#values-responses").val(valuesResponses);
-        
-                    // Submit the form
-                    $("#assessment-form").submit();
+                    questionHtml += "</ul>";
+                    quizContainer.append(questionHtml);
                 });
+            }
+
+            // Example quiz questions
+            var interestQuestions = [
+                { title: "What activities do you enjoy in your free time?", options: ["Reading", "Playing sports", "Cooking", "Watching movies"] },
+                { title: "What subjects do you find most engaging?", options: ["Science", "History", "Art", "Mathematics"] },
+                { title: "Which career paths intrigue you the most?", options: ["Technology", "Healthcare", "Education", "Business"] }
+            ];
+
+            var skillQuestions = [
+                { title: "Rate your proficiency in communication skills (1-5)", options: ["1", "2", "3", "4", "5"] },
+                { title: "Rate your problem-solving abilities (1-5)", options: ["1", "2", "3", "4", "5"] },
+                { title: "Rate your technical skills (1-5)", options: ["1", "2", "3", "4", "5"] }
+            ];
+
+            var valuesQuestions = [
+                { title: "I prioritize work-life balance.", options: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"] },
+                { title: "I value creativity and innovation.", options: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"] },
+                { title: "I seek opportunities for personal growth and development.", options: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"] }
+            ];
+
+            // Generate quiz questions
+            generateQuiz("interest-quiz", interestQuestions);
+            generateQuiz("skill-quiz", skillQuestions);
+            generateQuiz("values-quiz", valuesQuestions);
+
+            // Functionality to submit assessment
+            $("#submit-assessment").click(function () {
+                // Gather selected options from the quiz questions
+                var interestResponses = $("#interest-quiz input[type='radio']:checked").map(function () {
+                    return $(this).val();
+                }).get().join(',');
+
+                var skillResponses = $("#skill-quiz input[type='radio']:checked").map(function () {
+                    return $(this).val();
+                }).get().join(',');
+
+                var valuesResponses = $("#values-quiz input[type='radio']:checked").map(function () {
+                    return $(this).val();
+                }).get().join(',');
+
+                // Populate hidden input fields with quiz responses
+                $("#interest-responses").val(interestResponses);
+                $("#skill-responses").val(skillResponses);
+                $("#values-responses").val(valuesResponses);
+
+                // Submit the form
+                $("#assessment-form").submit();
             });
+        });
+    </script>
+    <script>
+        function validateForm() {
+            var name = document.forms["registrationForm"]["rname"].value;
+            var email = document.forms["registrationForm"]["remail"].value;
+            var phone = document.forms["registrationForm"]["rphone"].value;
+            var termsChecked = document.forms["registrationForm"]["rterms"].checked;
+        
+            if (name == "") {
+                alert("Please enter your name");
+                return false;
+            }
+            if (email == "") {
+                alert("Please enter your email");
+                return false;
+            }
+            if (phone == "") {
+                alert("Please enter your phone number");
+                return false;
+            }
+            if (!termsChecked) {
+                alert("Please agree to the terms");
+                return false;
+            }
+        }
         </script>
 </body>
 
