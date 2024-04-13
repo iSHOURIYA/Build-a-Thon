@@ -229,38 +229,38 @@
                 </div> <!-- end of col -->
                 <div class="col-lg-6">
     
-                    <!-- Registration Form -->
-                    <div class="form-container">
-                        <form id="registrationForm" name="registrationForm" data-netlify="true" onsubmit="return validateForm()" action="/test.html" netlify>
-                            <input type="hidden" name="redirect" value="http://127.0.0.1:5500/themewagon.github.io/corso/test.html">
-                            <div class="form-group">
-                                <input type="text" class="form-control-input" id="rname" name="rname" required>
-                                <label class="label-control" for="rname">Full Name</label>
-                                <div class="help-block with-errors"></div>
-                            </div>
-                            <div class="form-group">
-                                <input type="email" class="form-control-input" id="remail" name="remail" required>
-                                <label class="label-control" for="remail">Email Address</label>
-                                <div class="help-block with-errors"></div>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control-input" id="rphone" name="rphone" required>
-                                <label class="label-control" for="rphone">Phone Number</label>
-                                <div class="help-block with-errors"></div>
-                            </div>
-                            <div class="form-group checkbox">
-                                <input type="checkbox" id="rterms" value="Agreed-to-Terms" name="rterms" required>I
-                                agree to receive communication regarding career development resources and opportunities.
-                                <div class="help-block with-errors"></div>
-                            </div>
-                            <div class="form-group">
-                                <button type="submit" class="form-control-submit-button">Submit</button>
-                            </div>
-                            <div class="form-message">
-                                <div id="rmsgSubmit" class="h3 text-center hidden"></div>
-                            </div>
-                        </form>
-                    </div> <!-- end of form-container -->
+                <!-- Registration Form -->
+                <div class="form-container">
+                    <form id="registrationForm" name="registrationForm" data-netlify="true" onsubmit="return validateForm(event)" action="/test.html" netlify>
+                        <input type="hidden" name="redirect" value="http://127.0.0.1:5500/themewagon.github.io/corso/test.html">
+                        <div class="form-group">
+                            <input type="text" class="form-control-input" id="rname" name="rname" required>
+                            <label class="label-control" for="rname">Full Name</label>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control-input" id="remail" name="remail" required>
+                            <label class="label-control" for="remail">Email Address</label>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control-input" id="rphone" name="rphone" required>
+                            <label class="label-control" for="rphone">Phone Number</label>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-group checkbox">
+                            <input type="checkbox" id="rterms" value="Agreed-to-Terms" name="rterms" required>I
+                            agree to receive communication regarding career development resources and opportunities.
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="form-control-submit-button">Submit</button>
+                        </div>
+                        <div class="form-message">
+                            <div id="rmsgSubmit" class="h3 text-center hidden"></div>
+                        </div>
+                    </form>
+                </div> <!-- end of form-container -->
                 </div> <!-- end of col -->
             </div> <!-- end of row -->
         </div> <!-- end of container -->
@@ -1012,6 +1012,33 @@
                 return false;
             }
         }
+        </script>
+        <script>
+            function validateForm(event) {
+                var name = document.forms["registrationForm"]["rname"].value;
+                var email = document.forms["registrationForm"]["remail"].value;
+                var phone = document.forms["registrationForm"]["rphone"].value;
+                var termsChecked = document.forms["registrationForm"]["rterms"].checked;
+        
+                if (name == "") {
+                    alert("Please enter your name");
+                    return false;
+                }
+                if (email == "") {
+                    alert("Please enter your email");
+                    return false;
+                }
+                if (phone == "") {
+                    alert("Please enter your phone number");
+                    return false;
+                }
+                if (!termsChecked) {
+                    alert("Please agree to the terms");
+                    return false;
+                }
+                // Prevent default form submission
+                event.preventDefault();
+            }
         </script>
 </body>
 
